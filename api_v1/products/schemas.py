@@ -1,6 +1,17 @@
-def main():
+from pydantic import BaseModel, ConfigDict
+
+
+class ProductBase(BaseModel):
+    name: str
+    description: str
+    price: int
+
+
+class ProductCreate(BaseModel):
     pass
 
 
-if __name__ == __main__:
-    main()
+class Product(ProductBase):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
