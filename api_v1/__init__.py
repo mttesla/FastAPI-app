@@ -1,6 +1,7 @@
-def main():
-    pass
+from fastapi import APIRouter
+
+from .products.views import router as products_router
 
 
-if __name__ == __main__:
-    main()
+router = APIRouter()
+router.include_router(router=products_router, prefix="/products")

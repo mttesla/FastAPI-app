@@ -5,5 +5,5 @@ __all__ = (
     "Product",
 )
 from .base import Base
-from .db_helper import db_helper
+from ..models.db_helper import db_helper
 from .product import Product
