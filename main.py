@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 import uvicorn
 
+import asyncio
 from core.config import settings
 from core.models import Base, db_helper
 from api_v1 import router as router_v1
