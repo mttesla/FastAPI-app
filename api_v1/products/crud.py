@@ -1,8 +1,9 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.engine import Result
+from core.models import Product
 
-from .schemas import ProductCreate, Product
+from .schemas import ProductCreate
 
 
 async def get_products(session: AsyncSession) -> list[Product]:
