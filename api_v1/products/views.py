@@ -7,6 +7,7 @@ from .schemas import Product, ProductCreate
 from core.config import settings
 from core.models import db_helper
 from core.models.db_helper import DatabaseHelper
+from .dependencies import product_by_id
 
 router = APIRouter(tags=["Products"])
 
@@ -28,16 +29,14 @@ async def create_product(
 
 @router.get("/{product_id}/", response_model=Product)
 async def get_product(
-    product_id: int,
-    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+    product=Depends(product_by_id),
 ):
-    product = await crud.get_products(session=session, product_id=product_id)
-    if product is not None:
-        return product
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"Product {product_id} not found",
-    )
+    return product
+
+
+@router.put("/{product_id}/")
+async def update_product():
+    pass
 
 
 db_helper = DatabaseHelper(url=settings.db_url, echo=settings.db_echo)
